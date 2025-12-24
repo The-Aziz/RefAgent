@@ -1,0 +1,82 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "EC2HardwareBuilder"
+        },
+        {
+            "id": "BaseContextLiveTest"
+        },
+        {
+            "id": "BaseGenericComputeServiceContextLiveTest"
+        },
+        {
+            "id": "CreateKeyPairPlacementAndSecurityGroupsAsNeededAndReturnRunOptionsTest"
+        },
+        {
+            "id": "CreateKeyPairAndSecurityGroupsAsNeededAndReturnRunOptionsTest"
+        },
+        {
+            "id": "ResourceMetadataBuilder"
+        },
+        {
+            "id": "HardwareBuilder"
+        },
+        {
+            "id": "ComputeMetadataBuilder"
+        },
+        {
+            "id": "PlacementGroupApiLiveTest"
+        },
+        {
+            "id": "BaseComputeServiceContextLiveTest"
+        },
+        {
+            "id": "BaseViewLiveTest"
+        }
+    ],
+    "edges": [
+        {
+            "source": "EC2HardwareBuilder",
+            "target": "HardwareBuilder"
+        },
+        {
+            "source": "EC2HardwareBuilder",
+            "target": "CreateKeyPairAndSecurityGroupsAsNeededAndReturnRunOptionsTest"
+        },
+        {
+            "source": "EC2HardwareBuilder",
+            "target": "CreateKeyPairPlacementAndSecurityGroupsAsNeededAndReturnRunOptionsTest"
+        },
+        {
+            "source": "EC2HardwareBuilder",
+            "target": "PlacementGroupApiLiveTest"
+        },
+        {
+            "source": "BaseGenericComputeServiceContextLiveTest",
+            "target": "BaseViewLiveTest"
+        },
+        {
+            "source": "HardwareBuilder",
+            "target": "ComputeMetadataBuilder"
+        },
+        {
+            "source": "ComputeMetadataBuilder",
+            "target": "ResourceMetadataBuilder"
+        },
+        {
+            "source": "PlacementGroupApiLiveTest",
+            "target": "BaseComputeServiceContextLiveTest"
+        },
+        {
+            "source": "BaseComputeServiceContextLiveTest",
+            "target": "BaseGenericComputeServiceContextLiveTest"
+        },
+        {
+            "source": "BaseViewLiveTest",
+            "target": "BaseContextLiveTest"
+        }
+    ]
+}

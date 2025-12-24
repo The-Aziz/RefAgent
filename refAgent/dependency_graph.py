@@ -1,6 +1,10 @@
 import javalang
 import networkx as nx
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
 import os
 import json
 from utilities import create_directory_if_not_exists
@@ -98,8 +102,9 @@ class JavaClassDependencyAnalyzer:
         # Add nodes to the graph
         for node in graph_data["nodes"]:
             G.add_node(node["id"])
-        # Add edges to the graph
-        for link in graph_data["links"]:
+        # Add edges to the graph (handle both "links" and "edges" keys)
+        links_key = "links" if "links" in graph_data else "edges"
+        for link in graph_data.get(links_key, []):
             G.add_edge(link["source"], link["target"])
 
         # Verify if the target class exists in the graph
@@ -107,9 +112,9 @@ class JavaClassDependencyAnalyzer:
             print(f"Target class '{self.target_class}' does not exist in the graph.")
             return
 
-        # Get the subgraph for the target class and its connected components
-        subgraph_nodes = nx.descendants(G, self.target_class) | {self.target_class}
-        self.dependencies = G.subgraph(subgraph_nodes)
+        # Build neighbor set: classes the target depends on and classes depending on the target (ancestors + descendants)
+        neighbor_nodes = set(nx.ancestors(G, self.target_class)) | set(nx.descendants(G, self.target_class)) | {self.target_class}
+        self.dependencies = G.subgraph(neighbor_nodes)
 
         graph_data = nx.readwrite.json_graph.node_link_data(self.dependencies)
         
@@ -126,6 +131,9 @@ class JavaClassDependencyAnalyzer:
 
 
 def draw_dependency_graph(graph, filename='java_class_dependency_graph.png'):
+    if not HAS_MATPLOTLIB:
+        print(f"Warning: matplotlib not available, skipping graph visualization for {filename}")
+        return
     pos = nx.spring_layout(graph)
     plt.figure(figsize=(12, 8))
     nx.draw(graph, pos, with_labels=True, node_size=3000, node_color="skyblue", font_size=12, font_weight="bold", arrows=True)

@@ -1,4 +1,5 @@
 from refAgent.OpenaiLLM import OpenAILLM
+from refAgent.GroqLLM import GroqLLM
 from refAgent.prompt import REFACTORING_GENERATOR_PROMPT, PLANNER_PROMPT, COMPILER_PROMPT, TEST_SUMMARY_PROMPT, MULTI_TEST_SUMMARY_PROMPT
 from utilities import compile_project_with_maven, run_maven_test
 from typing import Optional
@@ -14,8 +15,13 @@ class BaseAgent:
     Subclasses can reuse `send` to call the LLM and get a cleaned text reply.
     """
 
-    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None):
-        self.llm = OpenAILLM(api_key)
+    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None, provider: str = 'openai'):
+        if provider == 'groq':
+            self.llm = GroqLLM(api_key)
+            self.provider = 'groq'
+        else:
+            self.llm = OpenAILLM(api_key)
+            self.provider = 'openai'
         self.model = model
         # per-agent max tokens (fallback to global default)
         self.max_tokens = max_tokens if max_tokens is not None else _config.DEFAULT_MAX_TOKENS
@@ -49,10 +55,10 @@ class RefactoringGeneratorAgent(BaseAgent):
     can be provided per-call.
     """
 
-    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None):
+    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None, provider: str = 'groq'):
         # default to configured refactoring generator max tokens
         default = _config.REFRACTORING_GENERATOR_MAX_TOKENS if max_tokens is None else max_tokens
-        super().__init__(api_key, model=model, max_tokens=default)
+        super().__init__(api_key, model=model, max_tokens=default, provider=provider)
 
     def run(self, user_query: str, use_refactoring_generator_prompt: bool = True, prompt_override: Optional[str] = None, max_tokens: Optional[int] = None):
         system_prompt = prompt_override if prompt_override is not None else (REFACTORING_GENERATOR_PROMPT if use_refactoring_generator_prompt else None)
@@ -67,9 +73,9 @@ class PlannerAgent(BaseAgent):
     This agent follows the planner prompt pattern used in `RefAgent_main.py`.
     """
 
-    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None):
+    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None, provider: str = 'groq'):
         default = _config.PLANNER_MAX_TOKENS if max_tokens is None else max_tokens
-        super().__init__(api_key, model=model, max_tokens=default)
+        super().__init__(api_key, model=model, max_tokens=default, provider=provider)
 
     def analyze_methods(self, java_code: str, cko_metrics: str, max_tokens: Optional[int] = None) -> str:
         """Return the planner instruction JSON as produced by the LLM.
@@ -117,9 +123,9 @@ class CompilerAgent(BaseAgent):
         LLM-produced summary/suggestions; when compilation succeeds, `summary` is an empty string.
     """
 
-    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None):
+    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None, provider: str = 'groq'):
         default = _config.COMPILER_MAX_TOKENS if max_tokens is None else max_tokens
-        super().__init__(api_key, model=model, max_tokens=default)
+        super().__init__(api_key, model=model, max_tokens=default, provider=provider)
 
     def compile_and_summarize(self, project_directory: str, original_code: str, refactored_code: str, max_tokens: Optional[int] = None):
         """Compile the project and if compilation fails, ask the LLM to summarize the error.
@@ -159,9 +165,9 @@ class TestAgent(BaseAgent):
         LLM-produced JSON summary/suggestions; when test passes, `summary` is an empty string.
     """
 
-    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None):
+    def __init__(self, api_key: str, model: str = "gpt-4", max_tokens: Optional[int] = None, provider: str = 'groq'):
         default = _config.TEST_MAX_TOKENS if max_tokens is None else max_tokens
-        super().__init__(api_key, model=model, max_tokens=default)
+        super().__init__(api_key, model=model, max_tokens=default, provider=provider)
 
     def run_test_and_summarize(self, class_name: str, project_dir: str = '.', method_name: str = None, original_code: str = '',refactored_code:str = '', verify: bool = False, max_tokens: Optional[int] = None):
         """Run `mvn test` (optionally for a single class/method). If the test process fails, ask the LLM to summarize the failure.

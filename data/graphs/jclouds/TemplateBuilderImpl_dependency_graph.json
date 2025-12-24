@@ -1,0 +1,122 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "AWSEC2TemplateBuilderImpl"
+        },
+        {
+            "id": "GoogleComputeEngineArbitraryCpuRamTemplateBuilderImpl"
+        },
+        {
+            "id": "BaseComputeServiceContextModule"
+        },
+        {
+            "id": "GoogleComputeEngineServiceContextModule"
+        },
+        {
+            "id": "ArbitraryCpuRamTemplateBuilderImpl"
+        },
+        {
+            "id": "GoogleComputeEngineArbitraryCpuRamTemplateBuilderImplTest"
+        },
+        {
+            "id": "EC2TemplateBuilderImpl"
+        },
+        {
+            "id": "TemplateBuilderImplTest"
+        },
+        {
+            "id": "ProfitBricksComputeServiceContextModule"
+        },
+        {
+            "id": "ComputeServiceAdapterContextModule"
+        },
+        {
+            "id": "TemplateBuilder"
+        },
+        {
+            "id": "AbstractModule"
+        },
+        {
+            "id": "TemplateBuilderImpl"
+        },
+        {
+            "id": "EC2TemplateBuilderTest"
+        },
+        {
+            "id": "EC2TemplateBuilderImplTest"
+        }
+    ],
+    "edges": [
+        {
+            "source": "AWSEC2TemplateBuilderImpl",
+            "target": "EC2TemplateBuilderImpl"
+        },
+        {
+            "source": "GoogleComputeEngineArbitraryCpuRamTemplateBuilderImpl",
+            "target": "ArbitraryCpuRamTemplateBuilderImpl"
+        },
+        {
+            "source": "BaseComputeServiceContextModule",
+            "target": "AbstractModule"
+        },
+        {
+            "source": "GoogleComputeEngineServiceContextModule",
+            "target": "ComputeServiceAdapterContextModule"
+        },
+        {
+            "source": "ArbitraryCpuRamTemplateBuilderImpl",
+            "target": "TemplateBuilderImpl"
+        },
+        {
+            "source": "EC2TemplateBuilderImpl",
+            "target": "TemplateBuilderImpl"
+        },
+        {
+            "source": "ProfitBricksComputeServiceContextModule",
+            "target": "ComputeServiceAdapterContextModule"
+        },
+        {
+            "source": "ComputeServiceAdapterContextModule",
+            "target": "BaseComputeServiceContextModule"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "EC2TemplateBuilderImpl"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "EC2TemplateBuilderTest"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "EC2TemplateBuilderImplTest"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "ArbitraryCpuRamTemplateBuilderImpl"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "TemplateBuilder"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "GoogleComputeEngineServiceContextModule"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "GoogleComputeEngineArbitraryCpuRamTemplateBuilderImplTest"
+        },
+        {
+            "source": "TemplateBuilderImpl",
+            "target": "ProfitBricksComputeServiceContextModule"
+        },
+        {
+            "source": "EC2TemplateBuilderImplTest",
+            "target": "TemplateBuilderImplTest"
+        }
+    ]
+}

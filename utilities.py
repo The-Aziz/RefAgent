@@ -1,18 +1,23 @@
 import os
 import json
 import subprocess
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-from mlxtend.frequent_patterns import apriori, association_rules
+# import pandas as pd  # Temporarily disabled due to SSL certificate issues
+# import seaborn as sns  # Temporarily disabled due to SSL certificate issues
+# import matplotlib.pyplot as plt  # Temporarily disabled due to SSL certificate issues
+# import numpy as np  # Temporarily disabled due to SSL certificate issues
+# from mlxtend.frequent_patterns import apriori, association_rules  # Temporarily disabled due to SSL certificate issues
 import shutil
 import os
 import git
 
 def parse_java_code(file_path):
-    with open(file_path, 'r') as f:
-        java_code = f.read()
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            java_code = f.read()
+    except UnicodeDecodeError:
+        # Fallback to latin-1 which accepts all byte values
+        with open(file_path, 'r', encoding='latin-1') as f:
+            java_code = f.read()
     return java_code
 
 def get_all_java_files(repo_path):
@@ -99,8 +104,8 @@ def write_to_java_file(file_path, java_code):
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
 
-        # Write the Java code to the file
-        with open(file_path, 'w') as file:
+        # Write the Java code to the file with UTF-8 encoding
+        with open(file_path, 'w', encoding='utf-8') as file:
             file.write(java_code)
         print(f"Java code successfully written to {file_path}")
     except Exception as e:
@@ -129,8 +134,13 @@ def extract_class_name(java_file_path):
     class_name = None
     
     try:
-        with open(java_file_path, 'r') as file:
-            java_code = file.read()
+        try:
+            with open(java_file_path, 'r', encoding='utf-8') as file:
+                java_code = file.read()
+        except UnicodeDecodeError:
+            # Fallback to latin-1 which accepts all byte values
+            with open(java_file_path, 'r', encoding='latin-1') as file:
+                java_code = file.read()
             
         tree = javalang.parse.parse(java_code)
         
@@ -139,11 +149,11 @@ def extract_class_name(java_file_path):
             break  # Assuming there's only one top-level class
         
     except FileNotFoundError:
-        print(f"File not found: {java_file_path}")
-    except javalang.parser.JavaSyntaxError as e:
-        print(f"Java syntax error in file: {java_file_path}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        pass  # Silent fail for missing files
+    except javalang.parser.JavaSyntaxError:
+        pass  # Silent fail for syntax errors
+    except Exception:
+        pass  # Silent fail for all other errors
 
     return class_name
 

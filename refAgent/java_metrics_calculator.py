@@ -2,7 +2,7 @@ import javalang
 import os
 import glob
 import subprocess
-import pandas as pd
+# import pandas as pd  # Temporarily disabled due to SSL certificate issues
 from collections import defaultdict
 
 class JavaMetricsCalculator:

@@ -1,0 +1,149 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "AtmosIntegrationLiveTest"
+        },
+        {
+            "id": "B2BlobIntegrationLiveTest"
+        },
+        {
+            "id": "BaseContextLiveTest"
+        },
+        {
+            "id": "CloudFilesBlobIntegrationLiveTest"
+        },
+        {
+            "id": "BaseBlobStoreIntegrationTest"
+        },
+        {
+            "id": "TransientBlobIntegrationTest"
+        },
+        {
+            "id": "CloudFilesUKBlobIntegrationLiveTest"
+        },
+        {
+            "id": "AzureBlobIntegrationLiveTest"
+        },
+        {
+            "id": "GoogleCloudStorageBlobIntegrationLiveTest"
+        },
+        {
+            "id": "S3BlobIntegrationLiveTest"
+        },
+        {
+            "id": "BaseBlobIntegrationTest"
+        },
+        {
+            "id": "SwiftBlobIntegrationLiveTest"
+        },
+        {
+            "id": "BaseViewLiveTest"
+        },
+        {
+            "id": "AWSS3BlobIntegrationLiveTest"
+        },
+        {
+            "id": "CloudFilesUSBlobIntegrationLiveTest"
+        },
+        {
+            "id": "FilesystemBlobIntegrationTest"
+        }
+    ],
+    "edges": [
+        {
+            "source": "AtmosIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "B2BlobIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "CloudFilesBlobIntegrationLiveTest",
+            "target": "SwiftBlobIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobStoreIntegrationTest",
+            "target": "BaseViewLiveTest"
+        },
+        {
+            "source": "TransientBlobIntegrationTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "CloudFilesUKBlobIntegrationLiveTest",
+            "target": "CloudFilesBlobIntegrationLiveTest"
+        },
+        {
+            "source": "AzureBlobIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "GoogleCloudStorageBlobIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "S3BlobIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "AtmosIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "FilesystemBlobIntegrationTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "SwiftBlobIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "S3BlobIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "TransientBlobIntegrationTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "BaseBlobStoreIntegrationTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "AzureBlobIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "B2BlobIntegrationLiveTest"
+        },
+        {
+            "source": "BaseBlobIntegrationTest",
+            "target": "GoogleCloudStorageBlobIntegrationLiveTest"
+        },
+        {
+            "source": "SwiftBlobIntegrationLiveTest",
+            "target": "BaseBlobIntegrationTest"
+        },
+        {
+            "source": "BaseViewLiveTest",
+            "target": "BaseContextLiveTest"
+        },
+        {
+            "source": "AWSS3BlobIntegrationLiveTest",
+            "target": "S3BlobIntegrationLiveTest"
+        },
+        {
+            "source": "CloudFilesUSBlobIntegrationLiveTest",
+            "target": "CloudFilesBlobIntegrationLiveTest"
+        },
+        {
+            "source": "FilesystemBlobIntegrationTest",
+            "target": "BaseBlobIntegrationTest"
+        }
+    ]
+}
