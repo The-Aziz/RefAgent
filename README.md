@@ -207,6 +207,24 @@ pylint refAgent/
 
 ---
 
+## 🙏 Credits & Acknowledgments
+
+This project is built upon and significantly extends the **original RefAgent repository** by anonymAgent.
+
+**Original Project:**
+- Repository: [anonymAgent/RefAgent](https://github.com/anonymAgent/RefAgent)
+- Original concept: Multi-agent LLM-based framework for automatic software refactoring
+
+**Key Enhancements in This Fork:**
+- ✨ Automated god-class detection with heuristic ranking
+- 💰 Integrated Groq LLM provider (100x cheaper than GPT-4)
+- 🧠 Token optimization and aggressive context pruning
+- 📚 Comprehensive documentation (6 guides + checklist)
+- 🔄 Multi-provider architecture (Groq + OpenAI)
+- 🎯 Focused neighborhood extraction for targeted refactoring
+- 🔐 Security hardening and credential protection
+---
+
 **⭐ Star us if you find this useful!**
     Fill in the required API keys before running the framework.
 
