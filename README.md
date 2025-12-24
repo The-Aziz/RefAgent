@@ -198,9 +198,6 @@ pylint refAgent/
 | "Project not found" | Clone to projects/before/{name} |
 | ModuleNotFoundError | Run pip install -r requirment.txt |
 
-## 📄 License
-
-Apache License 2.0
 
 ## 💬 Support
 
